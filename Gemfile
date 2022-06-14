@@ -58,3 +58,5 @@ gem 'devise'
 gem 'pry-byebug'
 gem 'rubocop', require: false
 gem 'rubocop-rails', require: false
+gem 'enum_help'
+gem 'rails-i18n'
