@@ -3,12 +3,13 @@ Rails.application.routes.draw do
   #scopeメソッドでurlのpublicを消去
   scope module: :public do
     root to: 'homes#top'
-    get 'about', to: 'homes#about'
-    resources :users, only: [:show, :edit, :update]
-  devise_for :users, controllers: {
+    devise_for :users, controllers: {
     registrations: 'public/registrations',
     sessions: 'public/sessions'
   }
+    get 'about', to: 'homes#about'
+    resources :users, only: [:show, :edit, :update]
+
   end
 
   #管理者側
