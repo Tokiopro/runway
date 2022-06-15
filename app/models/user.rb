@@ -5,6 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   enum sex: { male: 0, female: 1, others: 2}
-
+  has_many :posts
   has_one_attached :profile_image
 end

@@ -1,6 +1,7 @@
 class CreateCourses < ActiveRecord::Migration[6.1]
   def change
     create_table :courses do |t|
+      t.references :post, null: false, foreign_key: true
       t.string :name,        null: false
       t.float :start_latitude
       t.float :start_longitude

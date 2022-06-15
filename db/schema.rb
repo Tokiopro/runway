@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 2022_06_15_025359) do
   end
 
   create_table "courses", force: :cascade do |t|
+    t.integer "post_id", null: false
     t.string "name", null: false
     t.float "start_latitude"
     t.float "start_longitude"
@@ -97,16 +98,15 @@ ActiveRecord::Schema.define(version: 2022_06_15_025359) do
     t.integer "street_light"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_courses_on_post_id"
   end
 
   create_table "posts", force: :cascade do |t|
-    t.integer "users_id", null: false
-    t.integer "courses_id", null: false
+    t.integer "user_id", null: false
     t.text "article"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["courses_id"], name: "index_posts_on_courses_id"
-    t.index ["users_id"], name: "index_posts_on_users_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -132,6 +132,6 @@ ActiveRecord::Schema.define(version: 2022_06_15_025359) do
   add_foreign_key "course_methods", "courses", column: "courses_id"
   add_foreign_key "course_time_zones", "courses", column: "courses_id"
   add_foreign_key "course_types", "courses", column: "courses_id"
-  add_foreign_key "posts", "courses", column: "courses_id"
-  add_foreign_key "posts", "users", column: "users_id"
+  add_foreign_key "courses", "posts"
+  add_foreign_key "posts", "users"
 end
