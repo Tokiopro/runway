@@ -3,7 +3,7 @@ class Public::PostsController < ApplicationController
     @post = Post.new
     @post.build_course
   end
-  
+
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
@@ -22,18 +22,18 @@ class Public::PostsController < ApplicationController
   def edit
     @post = Post.find(params[:id])
   end
-  
+
   def update
   end
-  
+
   def destroy
   end
-  
+
   private
-  
+
   def post_params
-    params.require(:post).permit(:article, :image, course_attributes: [:name, :prefecutures])
-    #params.require(:course).permit(:name, :start_latitude, :start_longitude, :end_latitude, :end_longitude, 
+    params.require(:post).permit(:article, :image, course_attributes: [:name, :prefecutures, :undulation, :traffic_light, :street_light])
+    #params.require(:course).permit(:name, :start_latitude, :start_longitude, :end_latitude, :end_longitude,
                                   #:distance, :prefecutures, :undulation, :traffic_light, :street_light)
     #params.require(:course_type).permit(:type)#コースタイプ
     #params.require(:course_time_zone).permit(:time_zone)#おすすめの時間帯

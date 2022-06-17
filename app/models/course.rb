@@ -1,8 +1,9 @@
 class Course < ApplicationRecord
-    # has_many :course_equipments, dependent: :destroy
-    # has_many :course_time_zones, dependent: :destroy
-    # has_many :course_methods, dependent: :destroy
-    # has_many :course_types, dependent: :destroy
+    has_many :course_types, dependent: :destroy
+    has_many :course_time_zones, dependent: :destroy
+    has_many :course_equipments, dependent: :destroy
+    has_many :course_methods, dependent: :destroy
+  
     belongs_to :post
     
     enum prefecutures: {  "---":0,
@@ -16,7 +17,7 @@ class Course < ApplicationRecord
      福岡県:40,佐賀県:41,長崎県:42,熊本県:43,大分県:44,宮崎県:45,鹿児島県:46,
      沖縄県:47
    }
-    # enum undulation: { few: 0, little: 1, usually: 2}
-    # enum traffic_light: { few: 0, little: 1, usually: 2}
-    # enum street_light: { few: 0, little: 1, usually: 2}
+    enum undulation: { few: 0, little: 1, usually: 2, lot: 3, many: 4}, _prefix: true
+    enum traffic_light: { few: 0, little: 1, usually: 2, lot: 3, many: 4}, _prefix: true
+    enum street_light: { few: 0, little: 1, usually: 2, lot: 3, many: 4}, _prefix: true
 end
