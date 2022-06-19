@@ -7,7 +7,7 @@ class Post < ApplicationRecord
   # has_many :course_methods, through: :courses
   has_one_attached :image
 
-  accepts_nested_attributes_for :course, allow_destroy: true
+  # accepts_nested_attributes_for :course, allow_destroy: true
 
   def get_image(width, height)
     image.variant(resize_to_limit: [width, height]).processed

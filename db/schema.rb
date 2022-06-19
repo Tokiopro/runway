@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(version: 2022_06_15_025359) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["post_id"], name: "index_courses_on_post_id"
+  end
 
   create_table "posts", force: :cascade do |t|
     t.integer "user_id", null: false

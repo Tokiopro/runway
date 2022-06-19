@@ -1,16 +1,17 @@
 class Public::PostsController < ApplicationController
   before_action :ensure_user, only: [:edit, :uodate, :destroy]
-  
+
   def new
-    @post = Post.new
-    @post.build_course
+    @post = PostForm.new
+    # @post = Post.new
+    # @post.build_course
   end
 
   def create
-    @post = Post.new(post_params)
-    @post.user_id = current_user.id
+    @post = PostForm.new(post_params)
+
     if @post.save
-      redirect_to post_path(@post)
+      redirect_to post_path(@post.post_id)
     else
       render 'new', notice: "投稿できませんでした"
     end
@@ -42,9 +43,10 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:article, :image, course_attributes: [:name, :prefecutures, :undulation, :traffic_light, :street_light])
+    params.require(:post_form).permit(:post_id, :article, :image, :name, :prefecutures, :undulation, :traffic_light, :street_light, :type, :equipment, :method, type: [], time_zone: [], equipment: [], method: []).merge(user_id: current_user.id)
+    # params.require(:post).permit(:post_id, :article, :image, course_attributes: [:name]).merge(user_id: current_user.id)
   end
-  
+
   def ensure_user
     @posts = current_user.posts
     @post = @posts.find_by(id: params[:id])

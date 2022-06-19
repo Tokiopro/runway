@@ -1,8 +1,8 @@
 class Course < ApplicationRecord
-    # has_many :course_types, dependent: :destroy
-    # has_many :course_time_zones, dependent: :destroy
-    # has_many :course_equipments, dependent: :destroy
-    # has_many :course_methods, dependent: :destroy
+    has_many :course_types, dependent: :destroy
+    has_many :course_time_zones, dependent: :destroy
+    has_many :course_equipments, dependent: :destroy
+    has_many :course_methods, dependent: :destroy
   
     belongs_to :post
     

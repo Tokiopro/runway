@@ -1,5 +1,6 @@
 class CourseTimeZone < ApplicationRecord
   belongs_to :courses
-  
-  enum sex: { morning: 0, daytime: 1, evening: 2, night: 3}
+
+  TIME_ZONES = { morning: 0, daytime: 1, evening: 2, night: 3}.freeze
+  enum time_zone: TIME_ZONES
 end
