@@ -1,14 +1,20 @@
 Rails.application.routes.draw do
-  namespace :public do
-    get 'users/show'
-    get 'users/edit'
-  end
   #会員側
-  devise_for :users, controllers: {
+  #scopeメソッドでurlのpublicを消去
+  scope module: :public do
+    root to: 'homes#top'
+    devise_for :users, controllers: {
     registrations: 'public/registrations',
     sessions: 'public/sessions'
   }
-  
+    get 'about', to: 'homes#about'
+    resources :users, only: [:show, :edit, :update]
+    resources :posts, except: [:index] do
+      resources :post_comments, only: [:create, :destroy]
+    end
+
+  end
+
   #管理者側
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: 'admin/sessions'

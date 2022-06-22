@@ -1,0 +1,129 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-md-8 col-lg-12 px-5 px-sm-0 mx-auto">
+      <h1>投稿編集画面</h1>
+
+      <% if @post.errors.any? %>
+        <div class="error_explanation">
+        <% if @post.errors.count >= 2 %>
+        <h3><%= @book.errors.count %> errors prohibited this obj from being saved:</h3>
+        <% else %>
+        <h3><%= @book.errors.count %> error prohibited this obj from being saved:</h3>
+        <% end %>
+        <ul>
+        <% @poat.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+        <% end %>
+        </ul>
+        </div>
+      <% end %>
+   <%= form_with model: @post, url:post_path, method: :patch do |f| %>
+    <%= f.fields_for :course do |course_form| %>
+    <%= f.fields_for :course_types do |type| %>
+    <%= f.fields_for :course_time_zones do |time_zone| %>
+    <%= f.fields_for :course_methods do |method| %>
+    <%= f.fields_for :course_equipments do |equipment| %>
+    <div class="text-left m-3">
+      <h4>コース名</h4>
+      <%= course_form.text_field :name %>
+    </div>
+    <div class="text-left m-3">
+      <h4>本文</h4>
+      <%= f.text_area :article %>
+    </div>
+    <div class="text-left m-3">
+      <h4>画像</h4>
+      <%= f.file_field :image, accept: "image/*" %><!-- acceptで画像だけのファイル投稿 -->
+    </div>
+    <div class="text-left m-3">
+        <%= course_form.select :prefecutures, Course.prefecutures.keys, {} %>
+    </div>
+    <div class="form-group row m-3 text-center">
+      <div class="border border-success  p-3">
+        <%= course_form.label :undulation, '少ない' %>
+        <%= course_form.radio_button :undulation, :few %>
+      </div>
+      <div class="border border-success text-center p-3">
+        <%= course_form.label :undulation, 'やや少ない' %>
+        <%= course_form.radio_button :undulation, :little %>
+      </div>
+      <div class="border border-success p-3">
+        <%= course_form.label :undulation, '普通' %>
+        <%= course_form.radio_button :undulation, :usually %>
+      </div>
+      <div class="border border-success p-3">
+        <%= course_form.label :undulation, 'やや多い' %>
+        <%= course_form.radio_button :undulation, :lot %>
+      </div>
+      <div class="border border-success p-3">
+        <%= course_form.label :undulation, '多い' %>
+        <%= course_form.radio_button :undulation, :many %>
+      </div>
+    </div>
+    <div class="form-group row m-3 text-center">
+      <div class="border border-success  p-3">
+        <%= course_form.label :traffic_light, '少ない' %>
+        <%= course_form.radio_button :traffic_light, :few %>
+      </div>
+      <div class="border border-success text-center p-3">
+        <%= course_form.label :traffic_light, 'やや少ない' %>
+        <%= course_form.radio_button :traffic_light, :little %>
+      </div>
+      <div class="border border-success p-3">
+        <%= course_form.label :traffic_light, '普通' %>
+        <%= course_form.radio_button :traffic_light, :usually %>
+      </div>
+      <div class="border border-success p-3">
+        <%= course_form.label :traffic_light, 'やや多い' %>
+        <%= course_form.radio_button :traffic_light, :lot %>
+      </div>
+      <div class="border border-success p-3">
+        <%= course_form.label :traffic_light, '多い' %>
+        <%= course_form.radio_button :traffic_light, :many %>
+      </div>
+    </div>
+    <div class="form-group row m-3 text-center">
+      <div class="border border-success  p-3">
+        <%= course_form.label :street_light, '少ない' %>
+        <%= course_form.radio_button :street_light, :few %>
+      </div>
+      <div class="border border-success text-center p-3">
+        <%= course_form.label :street_light, 'やや少ない' %>
+        <%= course_form.radio_button :street_light, :little %>
+      </div>
+      <div class="border border-success p-3">
+        <%= course_form.label :street_light, '普通' %>
+        <%= course_form.radio_button :street_light, :usually %>
+      </div>
+      <div class="border border-success p-3">
+        <%= course_form.label :street_light, 'やや多い' %>
+        <%= course_form.radio_button :street_light, :lot %>
+      </div>
+      <div class="border border-success p-3">
+        <%= course_form.label :street_light, '多い' %>
+        <%= course_form.radio_button :street_light, :many %>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="text-center">
+        <div class="row">
+
+        </div>
+
+      </div>
+    </div>
+    <div class="text-center">
+      <%= f.submit '更新', class: "btn btn-success" %>
+    </div>
+    <!--<% end %> type-->
+    <!--<% end %> time_zone-->
+    <!--<% end %> equipment-->
+    <!--<% end %> method-->
+    <!--<% end %> course_form-->
+    <!--<% end %> form_with-->
+      <div class="row p-5">
+        <%= link_to "詳細画面に戻る", post_path(@post.id), class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>
