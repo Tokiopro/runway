@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   }
     get 'about', to: 'homes#about'
     resources :users, only: [:show, :edit, :update]
-    resources :posts, except: [:index]
+    resources :posts, except: [:index] do
+      resources :post_comments, only: [:create, :destroy]
+    end
 
   end
 

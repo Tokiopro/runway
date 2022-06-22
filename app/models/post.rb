@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
   belongs_to :user
   has_one :course, dependent: :destroy
+  has_many :post_comments, dependent: :destroy
   # has_many :course_types, through: :courses
   # has_many :course_time_zones, through: :courses
   # has_many :course_equipments, through: :courses
