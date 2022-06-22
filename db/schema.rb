@@ -12,6 +12,8 @@
 
 ActiveRecord::Schema.define(version: 2022_06_22_121016) do
 
+
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -53,35 +55,35 @@ ActiveRecord::Schema.define(version: 2022_06_22_121016) do
   end
 
   create_table "course_equipments", force: :cascade do |t|
-    t.integer "courses_id", null: false
+    t.integer "course_id", null: false
     t.integer "equipment"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["courses_id"], name: "index_course_equipments_on_courses_id"
+    t.index ["course_id"], name: "index_course_equipments_on_course_id"
   end
 
   create_table "course_methods", force: :cascade do |t|
-    t.integer "courses_id", null: false
+    t.integer "course_id", null: false
     t.integer "method"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["courses_id"], name: "index_course_methods_on_courses_id"
+    t.index ["course_id"], name: "index_course_methods_on_course_id"
   end
 
   create_table "course_time_zones", force: :cascade do |t|
-    t.integer "courses_id", null: false
+    t.integer "course_id", null: false
     t.integer "time_zone"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["courses_id"], name: "index_course_time_zones_on_courses_id"
+    t.index ["course_id"], name: "index_course_time_zones_on_course_id"
   end
 
   create_table "course_types", force: :cascade do |t|
-    t.integer "courses_id", null: false
+    t.integer "course_id", null: false
     t.integer "type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["courses_id"], name: "index_course_types_on_courses_id"
+    t.index ["course_id"], name: "index_course_types_on_course_id"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -137,10 +139,10 @@ ActiveRecord::Schema.define(version: 2022_06_22_121016) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "course_equipments", "courses", column: "courses_id"
-  add_foreign_key "course_methods", "courses", column: "courses_id"
-  add_foreign_key "course_time_zones", "courses", column: "courses_id"
-  add_foreign_key "course_types", "courses", column: "courses_id"
+  add_foreign_key "course_equipments", "courses"
+  add_foreign_key "course_methods", "courses"
+  add_foreign_key "course_time_zones", "courses"
+  add_foreign_key "course_types", "courses"
   add_foreign_key "courses", "posts"
   add_foreign_key "posts", "users"
 end
