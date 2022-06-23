@@ -5,24 +5,24 @@
       <table class="table">
         <tbody>
           <tr>
-            <td><%= image_tag @post.get_image(100,100) %><br><%= @post.course.name %>></td>
+            <td><%= image_tag @post.get_image(100,100) %><br><%= @post.course.name %></td>
             <td><%= @post.article %></td>
             <% if @post.user_id == current_user.id %>
             <td><%= link_to "編集する", edit_post_path(@post.id), class: 'btn btn-sm btn-success' %></td>
             <td><%= link_to "削除する", post_path(@post.id), class: 'btn btn-sm btn-danger', method: :delete, data:{confirm: "本当に削除しますか？"} %></td>
             <% end %>
-            <div class="new-comment">
-              <%= render 'public/post_comments/comment_form', post: @post, post_comment: @comment %>
-            </div>
-            <!--コメント一覧部分-->
-            <!--divタグのclassをid="comments_area"に変更-->
-            <div id="comments_area">
-              <%= render 'public/post_comments/post_comments', post: @post %>
-            </div>
           </tr>
         </tbody>
       </table>
 
     </div>
   </div>
+    <div class="new-comment">
+      <%= render 'public/post_comments/comment_form', post: @post, post_comment: @comment %>
+    </div>
+     <!--コメント一覧部分-->
+      <!--divタグのclassをid="comments_area"に変更-->
+    <div id="comments_area">
+      <%= render 'public/post_comments/post_comments', post: @post %>
+    </div>
 </div>
