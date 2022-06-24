@@ -11,8 +11,9 @@ import "channels"
 import "jquery";
 import "popper.js";
 import "bootstrap";
-import "../stylesheets/application" 
-require("jquery")
+import "../stylesheets/application"
+window.jQuery = window.$ = require('jquery')
+
 
 Rails.start()
 Turbolinks.start()
