@@ -8,6 +8,8 @@
   コメントする
 </button>
 
+
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -22,8 +24,14 @@
         <%= f.text_area :comment, rows:'5',placeholder: "コメントを入力", required: true, class: "p-auto mx-auto d-block" %>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-        <%= f.submit "送信する", class: "btn btn-primary px-5 mx-auto"%>
+          <div class="text-left">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+          </div>
+          <div class="mx-auto">
+          </div>
+          <div class="text-right">
+            <%= f.submit "送信する", class: "btn btn-primary px-5"%>
+          </div>
       </div>
     </div>
   </div>
