@@ -95,6 +95,63 @@
         <%= f.radio_button :street_light, :many, required: true %>
       </div>
     </div>
+
+    <h2>地図</h2>
+
+<style>
+#map {
+  height: 720px;
+  width: 720px;
+}
+</style>
+ <body>
+    <!--The div elements for the map and message -->
+    <div id="map"></div>
+    <div id="msg"></div>
+    <script>
+// Initialize and add the map
+var map;
+  function haversine_distance(mk1, mk2) {
+      var R = 6371.0710; // Radius of the Earth in miles
+      var rlat1 = mk1.position.lat() * (Math.PI/180);
+       // Convert degrees to radians
+      var rlat2 = mk2.position.lat() * (Math.PI/180);
+       // Convert degrees to radians
+      var difflat = rlat2-rlat1; // Radian difference (latitudes)
+      var difflon = (mk2.position.lng()-mk1.position.lng())
+                  * (Math.PI/180); // Radian difference (longitudes)
+
+      var d = 2 * R
+      * Math.asin(Math.sqrt(Math.sin(difflat/2)*Math.sin(difflat/2)
+      +Math.cos(rlat1)*Math.cos(rlat2)
+      *Math.sin(difflon/2)*Math.sin(difflon/2)));
+      return d;
+    }
+
+function initMap() {
+  // The map, centered on Central Park
+  const center = {lat: 40.774102, lng: -73.971734};
+  const options = {zoom: 15, scaleControl: true, center: center};
+  map = new google.maps.Map(
+      document.getElementById('map'), options);
+  // Locations of landmarks
+  const dakota = {lat: 40.7767644, lng: -73.9761399};
+  const frick = {lat: 40.771209, lng: -73.9673991};
+  // The markers for The Dakota and The Frick Collection
+  var mk1 = new google.maps.Marker({position: dakota, map: map});
+  var mk2 = new google.maps.Marker({position: frick, map: map});
+    // Draw a line showing the straight distance between the markers
+    // 二点間のマーカーの間に線をひき、距離を計算する。
+  var line =
+      new google.maps.Polyline({path: [dakota, frick], map: map});
+    var distance = haversine_distance(mk1, mk2);
+  document.getElementById('msg').innerHTML
+      = "コースの距離: " + distance.toFixed(2) + "km";
+}
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2s4W8NdcDiu71Qq8jMsbV6xXwKWA24q4&callback=initMap"></script>
+
     <div class="col-md-12">
       <div class="text-center">
         <div class="row form-group">
@@ -136,6 +193,3 @@
     <!--<% end %> form_with-->
   </div>
 </div>
-
-
-
