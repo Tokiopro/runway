@@ -130,17 +130,17 @@ var map;
 
 function initMap() {
   // The map, centered on Central Park
-  const center = {lat: 40.774102, lng: -73.971734};
+  const center = {lat: 35, lng: 135};
   const options = {zoom: 15, scaleControl: true, center: center};
   map = new google.maps.Map(
       document.getElementById('map'), options);
   // Locations of landmarks
-  const dakota = {lat: 40.7767644, lng: -73.9761399};
-  const frick = {lat: 40.771209, lng: -73.9673991};
+  const m1 = {lat: 35, lng: 135};
+  const m2 = {lat: 35.002, lng: 135.002};
   // The markers for The Dakota and The Frick Collection
   // doraggable: trueオプションでマーカーを動かせるようにする
-  var mk1 = new google.maps.Marker({position: dakota, map: map, draggable: true});
-  var mk2 = new google.maps.Marker({position: frick, map: map, draggable: true});
+  var mk1 = new google.maps.Marker({position: m1, map: map, draggable: true});
+  var mk2 = new google.maps.Marker({position: m2, map: map, draggable: true});
 
   google.maps.event.addListener(mk1, 'dragend', function(e) {
   //イベントの引数eの、プロパティ.latLngがmarkerの緯度経度。
@@ -164,7 +164,7 @@ function initMap() {
     // Draw a line showing the straight distance between the markers
     // 二点間のマーカーの間に線をひき、距離を計算する。
   var line =
-      new google.maps.Polyline({path: [dakota, frick], map: map});
+      new google.maps.Polyline({path: [m1, m2], map: map});
     var distance = haversine_distance(mk1, mk2);
   document.getElementById('msg').innerHTML
       = "コースの距離: " + distance.toFixed(2) + "km";
