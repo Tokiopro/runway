@@ -138,8 +138,29 @@ function initMap() {
   const dakota = {lat: 40.7767644, lng: -73.9761399};
   const frick = {lat: 40.771209, lng: -73.9673991};
   // The markers for The Dakota and The Frick Collection
-  var mk1 = new google.maps.Marker({position: dakota, map: map});
-  var mk2 = new google.maps.Marker({position: frick, map: map});
+  // doraggable: trueオプションでマーカーを動かせるようにする
+  var mk1 = new google.maps.Marker({position: dakota, map: map, draggable: true});
+  var mk2 = new google.maps.Marker({position: frick, map: map, draggable: true});
+
+  google.maps.event.addListener(mk1, 'dragend', function(e) {
+  //イベントの引数eの、プロパティ.latLngがmarkerの緯度経度。
+  $('#lat').text('マーカーの緯度' + e.latLng.lat());
+  $('#lng').text('マーカーの経度' + e.latLng.lng());
+  line.setMap(null);
+  line = new google.maps.Polyline({path: [ { lat: e.latLng.lat(), lng: e.latLng.lng()}, { lat: mk2.position.lat(), lng: mk2.position.lng()}], map: map});
+  var distance = haversine_distance(mk1, mk2);
+  document.getElementById('msg').innerHTML　= "コースの距離: " + distance.toFixed(2) + "km";
+ });
+  google.maps.event.addListener(mk2, 'dragend', function(e) {
+  //イベントの引数eの、プロパティ.latLngがmarkerの緯度経度。
+  $('#lat').text('マーカーの緯度' + e.latLng.lat());
+  $('#lng').text('マーカーの経度' + e.latLng.lng());
+  line.setMap(null);
+  line = new google.maps.Polyline({path: [{ lat: mk1.position.lat(), lng: mk1.position.lng()}, { lat: e.latLng.lat(), lng: e.latLng.lng()}], map: map});
+  var distance = haversine_distance(mk1, mk2);
+  document.getElementById('msg').innerHTML　= "コースの距離: " + distance.toFixed(2) + "km";
+ });
+
     // Draw a line showing the straight distance between the markers
     // 二点間のマーカーの間に線をひき、距離を計算する。
   var line =
