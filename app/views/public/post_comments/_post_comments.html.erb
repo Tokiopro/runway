@@ -2,7 +2,7 @@
 <div class="text-left m-3">
   <h5>コメント件数：<%= post.post_comments.count %></h5>
 </div>
-  <% post.post_comments.each do |comment| %>
+  <% post.post_comments.includes(:user).each do |comment| %>
     <%= comment.user.name %>
     <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
     <% if comment.user == current_user %>

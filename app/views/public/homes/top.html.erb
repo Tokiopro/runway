@@ -10,7 +10,9 @@
       <th>ユーザー名</th>
       <th>コース名</th>
       <th>内容</th>
-      <th colspan="3"></th>
+      <th>コメント数</th>
+      <th>行きたい！数</th>
+      <th>行った！数</th>
     </tr>
   </thead>
   <tbody>
@@ -20,6 +22,9 @@
       <td><%= post.user.name %></td>
       <td><%= link_to post_path(post.id) do %><%= post.course.name %><% end %></td>
       <td><%= post.article %></td>
+      <td class="text-center"><%= post.post_comments.count %></td>
+      <td class="text-center"><%= post.gos.count %></td>
+      <td class="text-center"><%= post.gones.count %></td>
     </tr>
     <% end %>
 

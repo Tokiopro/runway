@@ -10,19 +10,17 @@ class User < ApplicationRecord
 
   #行きたい！モデルのアソシエーション
   has_many :gos, dependent: :destroy
-  has_many :god_posts, through: :gos, sourse: :user
   #行った！モデルのアソシエーション
   has_many :gones, dependent: :destroy
-  has_many :goned_posts, through: :gones, sourse: :user
   #ボタン条件分岐
   def god_by?(post_id)
     gos.where(post_id: post_id).exists?
   end
-  
+
   def goned_by?(post_id)
     gones.where(post_id: post_id).exists?
   end
-  
+
   has_one_attached :profile_image
 
   def get_profile_image(width, height)
