@@ -1,7 +1,7 @@
 class Go < ApplicationRecord
   belongs_to :user
   belongs_to :post
-  
+
   #一人のユーザーが一つの投稿に一つしか行きたい！を押せない
-  validates_uniquness_of :post_id, scope: :user_id
+  validates :user_id, uniqueness: { scope: :post_id }
 end
