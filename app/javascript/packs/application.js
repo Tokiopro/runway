@@ -13,6 +13,7 @@ import "popper.js";
 import "bootstrap";
 import "../stylesheets/application"
 window.jQuery = window.$ = require('jquery')
+//= require packs.raty.js
 
 
 Rails.start()

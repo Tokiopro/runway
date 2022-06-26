@@ -22,6 +22,20 @@
       </div>
       <div class="modal-body">
         <%= f.text_area :comment, rows:'5',placeholder: "コメントを入力", required: true, class: "p-auto mx-auto d-block" %>
+             <div class="form-group row" id="star">
+          <%= f.label :rate,'評価 ', class:'col-md-3 col-form-label' %>
+          <%= f.hidden_field :rate, id: :review_star %>
+　　　　</div>
+        <script>
+　　　　  $('#rate').empty();
+          $('#rate').raty({
+            size     : 36,
+            starOff:  '<%= asset_path('star-off.png') %>',
+            starOn : '<%= asset_path('star-on.png') %>',
+ 　 　　     　scoreName: 'post_comment[rate]',
+ 　 　　     　half: false,
+          });
+        </script>
       </div>
       <div class="modal-footer">
           <div class="text-left">
