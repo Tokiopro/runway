@@ -1,36 +1,37 @@
+<h2 class="text-center p-3">ユーザープロフィール画面</h2>
 <div class="container">
     <table class="table">
   <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
+      <th><h2>項目</h2></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
+      <th scope="row">ニックネーム</th>
+      <td><%= @user.name %></td>
     </tr>
     <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
+      <th scope="row">プロフィール画像</th>
+      <td><%= image_tag @user.get_profile_image(80,80) %></td>
     </tr>
     <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
+      <th scope="row">性別</th>
+      <td><%= @user.sex %></td>
+    </tr>
+    <tr>
+      <th scope="row">年齢</th>
+      <td colspan="2"><%= @user.age %>歳</td>
+    </tr>
+    <tr>
+      <th scope="row">自己紹介</th>
+      <td height="300"><%= @user.introduction %></td>
     </tr>
   </tbody>
 </table>
-    <div class="container text center">
+    <div class="container text-center mb-5">
       <% if @user == current_user %>
-          <%= link_to "編集する", edit_user_path(@user) %>
+          <%= link_to "編集する", edit_user_path(@user), class: "btn btn-success" %>
       <% end %>
     </div>
 </div>

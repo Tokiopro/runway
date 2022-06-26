@@ -14,7 +14,8 @@
     <%= render 'layouts/header' %>
 
       <main>
-        <p id="notice"><%= notice %></p>
+        
+        <%= flash[:notice] %>
         <div id="flash-message">
           <%= render 'layouts/flash' %>
         </div>
