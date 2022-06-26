@@ -13,3 +13,33 @@
  *= require_tree .
  *= require_self
  */
+@keyframes flash-message-fade {
+  0% {
+    display: inline;
+    opacity: 0;
+    transform: scaleY(-1);
+    background-color: rgb(235, 247, 129);
+  }
+  10% { opacity: 0.5; }
+  20% { opacity: 1; transform: scaleY(1) }
+  90% { opacity: 1; transform: scaleY(1); }
+  100% {
+    opacity: 0;
+    transform: scaleY(0);
+    display: none;
+    background-color: white;
+  }
+}
+
+.flash-message {
+  animation-duration: 3s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+  display: none;
+  position: absolute;
+  z-index: 2;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+}
