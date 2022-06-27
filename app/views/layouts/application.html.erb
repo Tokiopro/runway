@@ -14,10 +14,9 @@
     <%= render 'layouts/header' %>
 
       <main>
-        
-        <%= flash[:notice] %>
-        <div id="flash-message">
-          <%= render 'layouts/flash' %>
+
+        <div class="flash">
+          <%= flash[:notice] %>
         </div>
         <p id="alert"><%= alert %></p>
           <div class="d-flex justify-content-center mb-2">

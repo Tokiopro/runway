@@ -20,3 +20,7 @@ require('packs/raty')
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+/* global $*/
+$(function(){
+  setTimeout("$('.flash').fadeOut('slow')", 2000);
+});

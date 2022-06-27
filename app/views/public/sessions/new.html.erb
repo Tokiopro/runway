@@ -25,6 +25,10 @@
           <%= f.submit "ログイン", class: 'btn-outline-primary btn-lg' %>
         </div>
       <% end %>
+
+      <div class="form_group">
+        <%= link_to "ゲストユーザーとしてログイン", users_guest_sign_in_path, class:"btn btn-light fas fa-seedling",method: :post %>
+      </div>
       <div class="container">
         <%= render "public/shared/links" %>
       </div>

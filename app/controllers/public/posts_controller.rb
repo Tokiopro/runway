@@ -11,7 +11,7 @@ class Public::PostsController < ApplicationController
     @post = PostForm.new(post_params)
 
     if @post.save
-      redirect_to post_path(@post.post_id)
+      redirect_to post_path(@post.post_id), notice: "投稿に成功しました!"
     else
       render 'new', notice: "投稿できませんでした"
     end
@@ -29,7 +29,7 @@ class Public::PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      redirect_to post_path(@post.id)
+      redirect_to post_path(@post.id), notice: "投稿情報を更新しました！"
     else
       render edit_post_path(@post.id), notice: "更新できませんでした"
     end
@@ -38,7 +38,7 @@ class Public::PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to root_path
+    redirect_to root_path, notice: "投稿を削除しました"
   end
 
   private
