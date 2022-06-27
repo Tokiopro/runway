@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
   #会員側
+
+  #ゲストログイン機能のルーティング追加
+  devise_scope :user do
+    post 'users/guest_sign_in', to: 'public/sessions#guest_sign_in'
+  end
+
   #scopeメソッドでurlのpublicを消去
   scope module: :public do
     root to: 'homes#top'

@@ -61,6 +61,7 @@ gem 'rubocop', require: false
 gem 'rubocop-rails', require: false
 gem 'enum_help'
 gem 'rails-i18n'
+gem 'devise-i18n'
 
 gem 'dotenv-rails'
 group :production do

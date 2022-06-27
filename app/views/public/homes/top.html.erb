@@ -9,17 +9,17 @@
       <th></th>
       <th>ユーザー名</th>
       <th>コース名</th>
-      <th>内容</th>
+      <th>平均レビュー数</th>
       <th>コメント数</th>
       <th>行きたい！数</th>
       <th>行った！数</th>
     </tr>
   </thead>
   <tbody>
-    <% @posts.each do |post| %>
+    <% @posts.includes(:user => [:profile_image_attachment]).each do |post| %>
     <tr>
       <td><%= link_to user_path(post.user_id) do %><%= image_tag post.user.get_profile_image(80,80) %><% end %></td>
-      <td><%= post.user.name %></td>
+      <td width="200"><%= post.user.name %></td>
       <td><%= link_to post_path(post.id) do %><%= post.course.name %><% end %></td>
       <td><%= post.article %></td>
       <td class="text-center"><%= post.post_comments.count %></td>

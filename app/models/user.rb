@@ -30,4 +30,16 @@ class User < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
+
+  #ゲストログイン機能のクラスメソッド
+  def self.guest
+    find_or_create_by!(name: 'ゲストユーザー',
+                       email: 'guestda@example.com',
+                       encrypted_password: '000000',
+                       sex: 0,
+                       age: 25,
+                       is_deleted: false) do |user|
+      user.password = SecureRandom.urlsafe_base64
+    end
+  end
 end
