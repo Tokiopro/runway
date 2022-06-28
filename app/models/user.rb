@@ -30,6 +30,11 @@ class User < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width, height]).processed
   end
+  
+  #ログイン時に退会しているユーザーでログインできないように制約する
+  def active_for_authentication?
+    super && (is_deleted == false)
+  end
 
   #ゲストログイン機能のクラスメソッド
   def self.guest

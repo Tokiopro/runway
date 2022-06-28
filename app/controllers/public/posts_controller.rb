@@ -26,8 +26,8 @@ class Public::PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find(params[:id])
-    if @post.update(post_params)
+    @post = PostForm.new(post_params)
+    if @post.save
       redirect_to post_path(@post.id), notice: "投稿情報を更新しました！"
     else
       render edit_post_path(@post.id), notice: "更新できませんでした"
