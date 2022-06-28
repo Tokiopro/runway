@@ -20,6 +20,7 @@ class Public::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @post_form = PostForm.import(params[:id])
     @comment = PostComment.new
   end
 

@@ -12,23 +12,23 @@ ja:
         others: その他 # enumの値
     course:
       undulation: #起伏
-        few: ほぼない
-        little: 少しある
+        few: 少ない
+        little: やや少ない
         usually: 普通
-        lot: まぁまぁ
-        many: かなりある
+        lot: やや多い
+        many: 多い
       traffic_light: #信号
-        few: ほぼない
-        little: 少しある
+        few: 少ない
+        little: やや少ない
         usually: 普通
-        lot: まぁまぁ
-        many: かなりある
+        lot: やや多い
+        many: 多い
       street_light: #街灯
-        few: ほぼない
-        little: 少しある
+        few: 少ない
+        little: やや少ない
         usually: 普通
-        lot: まぁまぁ
-        many: かなりある
+        lot: やや多い
+        many: 多い
     course_type: #コースタイプ
       type:
         way: ロード

@@ -32,7 +32,17 @@
     </div>
     <div class="text-left m-3">
       <h4>コースがある都道府県</h4>
-      <%= f.select :prefecutures, Course.prefecutures.keys, {}, required: true %>
+      <%= f.select :prefecutures, { "---":0,
+     北海道:1,青森県:2,岩手県:3,宮城県:4,秋田県:5,山形県:6,福島県:7,
+     茨城県:8,栃木県:9,群馬県:10,埼玉県:11,千葉県:12,東京都:13,神奈川県:14,
+     新潟県:15,富山県:16,石川県:17,福井県:18,山梨県:19,長野県:20,
+     岐阜県:21,静岡県:22,愛知県:23,三重県:24,
+     滋賀県:25,京都府:26,大阪府:27,兵庫県:28,奈良県:29,和歌山県:30,
+     鳥取県:31,島根県:32,岡山県:33,広島県:34,山口県:35,
+     徳島県:36,香川県:37,愛媛県:38,高知県:39,
+     福岡県:40,佐賀県:41,長崎県:42,熊本県:43,大分県:44,宮崎県:45,鹿児島県:46,
+     沖縄県:47
+   }, { include_blank: '選択してください'}, required: true %>
     </div>
     <div class="text-left m-3">
       <h5>コースの起伏</h5>
@@ -131,10 +141,10 @@
           <h5>コース路面の種類</h5>
         </div>
         <div class="row form-group">
-          <% CourseType.types.each_with_index do |e, i| %>
+          <% CourseType.types.each_with_index do |(key, value) , i| %>
           <div class="border border-success p-3 m-2">
-            <%= CourseType.types_i18n[e[0]] %>
-            <%= check_box_tag "course_type[type]", e[0]  %>
+            <%= CourseType.types_i18n[key] %>
+            <%= check_box_tag "post_form[type][#{i}]", key  %>
           </div>
           <% end %>
         </div>
@@ -145,7 +155,7 @@
           <% CourseTimeZone.time_zones.each_with_index do |e, i| %>
           <div class="border border-success p-3 m-2">
             <%= CourseTimeZone.time_zones_i18n[e[0]] %>
-            <%= check_box_tag "course_method[method]", e[0]%>
+            <%= check_box_tag "post_form[method][#{i}]", e[0]  %>
           </div>
           <% end %>
         </div>
@@ -156,22 +166,24 @@
           <% CourseEquipment.equipment.each_with_index do |e, i| %>
           <div class="border border-success p-3 m-2">
             <%= CourseEquipment.equipment_i18n[e[0]] %>
-            <%= check_box_tag "course_equipment[equipment]", e[0]  %>
+            <%= check_box_tag "post_form[equipment][#{i}]", e[0]  %>
           </div>
           <% end %>
         </div>
         <div class="text-left">
-          <h5>おすすめの運動の仕方</h5>
+          <h5>おすすめの運動の方法</h5>
         </div>
         <div class="row form-group">
-
           <% CourseMethod.methods.each_with_index do |e, i| %>
           <div class="border border-success p-3 m-2">
             <%= CourseMethod.methods_i18n[e[0]] %>
-            <%= check_box_tag "course_method[method]", e[0]  %>
+            <%= check_box_tag "post_form[method][#{i}]", e[0]  %>
           </div>
           <% end %>
         </div>
+
+      </div>
+    </div>
     <div class="text-center">
       <%= f.submit '更新', class: "btn btn-success" %>
     </div>

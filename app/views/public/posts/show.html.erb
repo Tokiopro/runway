@@ -1,27 +1,79 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8 offset-md-1">
-      <h2>投稿</h2>
+      <h2>コース詳細</h2>
       <table class="table">
         <tbody>
           <tr>
-            <td><%= image_tag @post.get_image(100,100) %><br><%= @post.course.name %></td>
-            <td><%= @post.article %></td>
-            <% if @post.user_id == current_user.id %>
-            <td><%= link_to "編集する", edit_post_path(@post.id), class: 'btn btn-sm btn-success' %></td>
-            <td><%= link_to "削除する", post_path(@post.id), class: 'btn btn-sm btn-danger', method: :delete, data:{confirm: "本当に削除しますか？"} %></td>
-            <% end %>
+            <td><%= image_tag @post_form.image %><br><h3>コース名　<%= @post_form.name %></h3></td>
           </tr>
           <tr>
-            <td id="go_<%= @post.id %>" >
-              <%= render partial: "public/gos/go", locals: { post: @post } %>
-            </td>
-            <td id="gone_<%= @post.id %>" >
-              <%= render partial: "public/gones/gone", locals: { post: @post } %>
-            </td>
+            <td><h5>都道府県</h5><%= @post.course.prefecutures %></td>
+          </tr>
+          <tr>
+            <td><h5>コースの概算距離</h5><%= @post.course.distance %>km</td>
+          </tr>
+          <tr>
+            <td><h5>コースの起伏</h5><%= @post.course.undulation_i18n %></td>
+          </tr>
+          <tr>
+            <td><h5>信号機の量</h5><%= @post.course.traffic_light_i18n %></td>
+          </tr>
+          <tr>
+            <td><h5>街灯の量</h5><%= @post.course.street_light_i18n %></td>
           </tr>
         </tbody>
       </table>
+    <div class="my-3">
+      <% if @post_form.type.blank? %>
+      <% else %>
+      <h5>コース路面の種類</h5>
+        <% @post.course.course_types.each do |t| %>
+          <div class="col-md-8 m-3">・<%= t.type_i18n %></div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="my-3">
+      <% if @post_form.time_zone.blank? %>
+      <% else %>
+      <h5>運動におすすめの時間帯</h5>
+        <% @post.course.course_time_zones.each do |t| %>
+          <div class="col-md-8 m-3">・<%= t.time_zone_i18n %></div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="m-3">
+      <% if @post_form.equipment.blank? %>
+      <% else %>
+      <h5>付近の設備</h5>
+        <% @post.course.course_equipments.each do |t| %>
+          <div class="col-md-8 m-3">・<%= t.equipment_i18n %></div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="my-3">
+      <% if @post_form.method.blank? %>
+      <% else %>
+      <h5>おすすめの運動方法</h5>
+        <% @post.course.course_methods.each do |t| %>
+          <div class="col-md-8 m-3">・<%= t.method_i18n %></div>
+        <% end %>
+      <% end %>
+    </div>
+    <div class="row m-5">
+      <div id="go_<%= @post.id %>" class="m-5" >
+        <%= render partial: "public/gos/go", locals: { post: @post } %>
+      </div>
+      <div id="gone_<%= @post.id %>" class="m-5" >
+        <%= render partial: "public/gones/gone", locals: { post: @post } %>
+      </div>
+    </div>
+    <div class="m-3">
+      <% if @post.user_id == current_user.id %>
+        <%= link_to "コースを編集する", edit_post_path(@post.id), class: 'btn btn-sm btn-success' %>
+        <%= link_to "コースを削除する", post_path(@post.id), class: 'btn btn-sm btn-danger', method: :delete, data:{confirm: "本当に削除しますか？"} %>
+      <% end %>
+    </div>
 
     </div>
   </div>

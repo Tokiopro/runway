@@ -102,16 +102,4 @@ class PostForm
     ret_val
   end
 
-  def update
-    ActiveRecord::Base.transaction do
-      post = Post.update(article: article, user_id: user_id, image: image)
-      self.post_id = post.id
-      Course.update(post_id: post_id, name: name, distance: distance, prefecutures: prefecutures, undulation: undulation, traffic_light: traffic_light, street_light: street_light)
-      CourseType.update(type: [])
-      CourseTimeZone.update(time_zone: [])
-      CourseEquipment.update(equipment: [])
-      CourseMethod.update(method: [])
-    end
-  end
-
 end
