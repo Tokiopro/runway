@@ -168,7 +168,7 @@ function initMap() {
 }
     </script>
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['API_KEY'] %>&callback=initMap"></script>
+    src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.google_map_api_key %>&callback=initMap"></script>
 
 
     <div class="col-md-12">
