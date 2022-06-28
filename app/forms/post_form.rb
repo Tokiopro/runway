@@ -18,6 +18,8 @@ class  PostForm
     validates :distance
   end
 
+  
+
   def save
     ActiveRecord::Base.transaction do
       post = Post.create(article: article, user_id: user_id, image: image)
@@ -29,4 +31,17 @@ class  PostForm
       CourseMethod.create(method: [])
     end
   end
+
+  def update
+    ActiveRecord::Base.transaction do
+      post = Post.update(article: article, user_id: user_id, image: image)
+      self.post_id = post.id
+      Course.update(post_id: post_id, name: name, distance: distance, prefecutures: prefecutures, undulation: undulation, traffic_light: traffic_light, street_light: street_light)
+      CourseType.update(type: [])
+      CourseTimeZone.update(time_zone: [])
+      CourseEquipment.update(equipment: [])
+      CourseMethod.update(method: [])
+    end
+  end
+
 end
