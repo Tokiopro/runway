@@ -60,7 +60,7 @@ gem 'pry-byebug'
 gem 'rubocop', require: false
 gem 'rubocop-rails', require: false
 gem 'enum_help'
-gem 'rails-i18n'
+# gem 'rails-i18n'
 gem 'devise-i18n'
 
 gem 'dotenv-rails'

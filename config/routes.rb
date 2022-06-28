@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   }
     get 'about', to: 'homes#about'
     resources :users, only: [:show, :edit, :update]
+    get '/search', to: 'homes#search'
     resources :posts, except: [:index] do
       resources :post_comments, only: [:create, :destroy]
       resources :gos, only: [:create, :destroy]
