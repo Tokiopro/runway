@@ -7,6 +7,8 @@ class Public::PostsController < ApplicationController
   end
 
   def create
+    p "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    p params
     @post = PostForm.new(post_params)
 
     if @post.save
@@ -22,15 +24,15 @@ class Public::PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find(params[:id])
+    @post = PostForm.import(params[:id])
   end
 
   def update
     @post = PostForm.new(post_params)
     if @post.save
-      redirect_to post_path(@post.id), notice: "投稿情報を更新しました！"
+      redirect_to post_path(@post.post_id), notice: "投稿情報を更新しました！"
     else
-      render edit_post_path(@post.id), notice: "更新できませんでした"
+      render edit_post_path(@post.post_id), notice: "更新できませんでした"
     end
   end
 
@@ -42,8 +44,10 @@ class Public::PostsController < ApplicationController
 
   private
 
+  # { post_form: { post_id: 1 }}
+  # { post: { post_id: 1 }}
   def post_params
-    params.require(:post_form).permit(:post_id, :article, :image, :distance, :name, :prefecutures, :undulation, :traffic_light, :street_light, :type, :equipment, :method, type: [], time_zone: [], equipment: [], method: []).merge(user_id: current_user.id)
+    params.require(:post_form).permit(:post_id, :article, :image, :distance, :name, :prefecutures, :undulation, :traffic_light, :street_light, type: {}, time_zone: {}, equipment: {}, method: {}).merge(user_id: current_user.id)
   end
 
   def ensure_user

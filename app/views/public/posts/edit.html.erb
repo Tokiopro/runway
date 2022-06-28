@@ -145,7 +145,7 @@
           <% CourseTimeZone.time_zones.each_with_index do |e, i| %>
           <div class="border border-success p-3 m-2">
             <%= CourseTimeZone.time_zones_i18n[e[0]] %>
-            <%= check_box_tag "course_method[method]", e[0]  %>
+            <%= check_box_tag "course_method[method]", e[0]%>
           </div>
           <% end %>
         </div>
@@ -177,7 +177,7 @@
     </div>
     <!--<% end %> form_with-->
       <div class="row p-5">
-        <%= link_to "詳細画面に戻る", post_path(@post.id), class: "btn btn-primary" %>
+        <%= link_to "詳細画面に戻る", post_path(@post.post_id), class: "btn btn-primary" %>
       </div>
     </div>
   </div>
