@@ -1,6 +1,6 @@
 class Public::HomesController < ApplicationController
   def top
-    @posts = Post.all.includes([:course], [:user], [:image_attachment]).includes(user: { profile_image_attachment: :blob })
+    @posts = Post.with_attached_image.includes(:course, :user)
   end
 
   # def self.search(keyword)
