@@ -1,11 +1,13 @@
 ja:
-  enums: 
+  activerecord:
+    attributes:
+  enums:
     user: # モデル名
       sex: # カラム名
         male: 男性 # enumの値
         female: 女性 # enumの値
         others: その他 # enumの値
-    course: 
+    course:
       undulation: #起伏
         few: ほぼない
         little: 少しある
@@ -30,20 +32,20 @@ ja:
         trail: トレイル
         beach: ビーチ
         truck: トラック
-    course_time_zones: #時間帯
+    course_time_zone: #時間帯
       time_zone:
         morning: 早朝
         daytime: 昼間
         evening: 夕方
         night: 夜
-    course_equipments: #設備
+    course_equipment: #設備
       equipment:
         toilet: トイレ
         room: 更衣室
         shower: シャワー
         locker: ロッカー
         parking: 駐車場
-    course_methods: #方法
+    course_method: #方法
       method:
         stroll: 散歩
         walking: ウォーキング

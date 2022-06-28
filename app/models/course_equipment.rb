@@ -1,6 +1,6 @@
 class CourseEquipment < ApplicationRecord
-  belongs_to :courses
+  belongs_to :course
 
-  EQUIPMENTS = { toilet: 0, room: 1, shower: 2, locker: 3, parking: 4}.freeze
-  enum equipment: EQUIPMENTS
+
+  enum equipment: { toilet: 0, room: 1, shower: 2, locker: 3, parking: 4}
 end

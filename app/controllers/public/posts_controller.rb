@@ -2,9 +2,8 @@ class Public::PostsController < ApplicationController
   before_action :ensure_user, only: [:edit, :uodate, :destroy]
 
   def new
+    #PostForm = フォームオブジェクト(app/form/post_form.rb)
     @post = PostForm.new
-    # @post = Post.new
-    # @post.build_course
   end
 
   def create
@@ -44,8 +43,7 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post_form).permit(:post_id, :article, :image, :name, :prefecutures, :undulation, :traffic_light, :street_light, :type, :equipment, :method, type: [], time_zone: [], equipment: [], method: []).merge(user_id: current_user.id)
-    # params.require(:post).permit(:post_id, :article, :image, course_attributes: [:name]).merge(user_id: current_user.id)
+    params.require(:post_form).permit(:post_id, :article, :image, :distance, :name, :prefecutures, :undulation, :traffic_light, :street_light, :type, :equipment, :method, type: [], time_zone: [], equipment: [], method: []).merge(user_id: current_user.id)
   end
 
   def ensure_user
