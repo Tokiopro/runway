@@ -1,33 +1,24 @@
 <div class="container">
   <div class="col-md-12">
     <%= form_with model: @post, url:posts_path do |f| %>
-      <%#= f.fields_for :course_types do |type| %>
-      <%#= f.fields_for :course_methods do |method| %>
-      <%#= f.fields_for :course_equipments do |equipment| %>
-
-
-
     <div class="text-left m-3">
       <h4>コース名</h4>
       <%= f.text_field :name, required: true %>
     </div>
-      <div class="text-left m-3">
-        <h4>本文</h4>
-        <%= f.text_area :article, required: true %>
-      </div>
-      <div class="text-left m-3">
-        <h4>画像</h4>
-        <%= f.file_field :image, accept: "image/*", required: true %><!-- acceptで画像だけのファイル投稿 -->
-      </div>
-
-      <!--CourceのData-->
-      <%#= f.fields_for :course do |course| %>
-        <h4>Course</h4>
-        <%#= course.text_field :name %>
-      <%# end %>
-
     <div class="text-left m-3">
+      <h4>本文</h4>
+      <%= f.text_area :article, required: true %>
+    </div>
+    <div class="text-left m-3">
+      <h4>画像</h4>
+      <%= f.file_field :image, accept: "image/*", required: true %><!-- acceptで画像だけのファイル投稿 -->
+    </div>
+    <div class="text-left m-3">
+      <h4>コースがある都道府県</h4>
       <%= f.select :prefecutures, Course.prefecutures.keys, {}, required: true %>
+    </div>
+    <div class="text-left m-3">
+      <h5>コースの起伏</h5>
     </div>
     <div class="form-group row m-3 text-center">
       <div class="border border-success  p-3">
@@ -51,6 +42,9 @@
         <%= f.radio_button :undulation, :many, required: true %>
       </div>
     </div>
+    <div class="text-left m-3">
+      <h5>信号機の量</h5>
+    </div>
     <div class="form-group row m-3 text-center">
       <div class="border border-success  p-3">
         <%= f.label :traffic_light, '少ない' %>
@@ -72,6 +66,9 @@
         <%= f.label :traffic_light, '多い' %>
         <%= f.radio_button :traffic_light, :many, required: true %>
       </div>
+    </div>
+    <div class="text-left m-3">
+      <h5>街灯の量</h5>
     </div>
     <div class="form-group row m-3 text-center">
       <div class="border border-success  p-3">
@@ -95,47 +92,146 @@
         <%= f.radio_button :street_light, :many, required: true %>
       </div>
     </div>
+
+    <h2>地図</h2>
+
+<style>
+#map {
+  height: 720px;
+  width: 720px;
+}
+</style>
+ <body>
+    <!--The div elements for the map and message -->
+    <div id="map"></div>
+    <div id="msg"></div>
+    <script>
+// Initialize and add the map
+var map;
+  function haversine_distance(mk1, mk2) {
+      var R = 6371.0710; // Radius of the Earth in miles
+      var rlat1 = mk1.position.lat() * (Math.PI/180);
+       // Convert degrees to radians
+      var rlat2 = mk2.position.lat() * (Math.PI/180);
+       // Convert degrees to radians
+      var difflat = rlat2-rlat1; // Radian difference (latitudes)
+      var difflon = (mk2.position.lng()-mk1.position.lng())
+                  * (Math.PI/180); // Radian difference (longitudes)
+
+      var d = 2 * R
+      * Math.asin(Math.sqrt(Math.sin(difflat/2)*Math.sin(difflat/2)
+      +Math.cos(rlat1)*Math.cos(rlat2)
+      *Math.sin(difflon/2)*Math.sin(difflon/2)));
+      return d;
+    }
+
+function initMap() {
+  // The map, centered on Central Park
+  const center = {lat: 35, lng: 135};
+  const options = {zoom: 15, scaleControl: true, center: center};
+  map = new google.maps.Map(
+      document.getElementById('map'), options);
+  // Locations of landmarks
+  const m1 = {lat: 35, lng: 135};
+  const m2 = {lat: 35.002, lng: 135.002};
+  // The markers for The Dakota and The Frick Collection
+  // doraggable: trueオプションでマーカーを動かせるようにする
+  var mk1 = new google.maps.Marker({position: m1, map: map, draggable: true});
+  var mk2 = new google.maps.Marker({position: m2, map: map, draggable: true});
+
+  google.maps.event.addListener(mk1, 'dragend', function(e) {
+  //イベントの引数eの、プロパティ.latLngがmarkerの緯度経度。
+  $('#lat').text('マーカーの緯度' + e.latLng.lat());
+  $('#lng').text('マーカーの経度' + e.latLng.lng());
+  line.setMap(null);
+  line = new google.maps.Polyline({path: [ { lat: e.latLng.lat(), lng: e.latLng.lng()}, { lat: mk2.position.lat(), lng: mk2.position.lng()}], map: map});
+  var distance = haversine_distance(mk1, mk2);
+  document.getElementById('msg').innerHTML　= "コースの距離: " + distance.toFixed(2) + "km";
+ });
+  google.maps.event.addListener(mk2, 'dragend', function(e) {
+  //イベントの引数eの、プロパティ.latLngがmarkerの緯度経度。
+  $('#lat').text('マーカーの緯度' + e.latLng.lat());
+  $('#lng').text('マーカーの経度' + e.latLng.lng());
+  line.setMap(null);
+  line = new google.maps.Polyline({path: [{ lat: mk1.position.lat(), lng: mk1.position.lng()}, { lat: e.latLng.lat(), lng: e.latLng.lng()}], map: map});
+  var distance = haversine_distance(mk1, mk2);
+  document.getElementById('msg').innerHTML　= "コースの距離: " + distance.toFixed(2) + "km";
+ });
+
+    // Draw a line showing the straight distance between the markers
+    // 二点間のマーカーの間に線をひき、距離を計算する。
+  var line =
+      new google.maps.Polyline({path: [m1, m2], map: map});
+    var distance = haversine_distance(mk1, mk2);
+  document.getElementById('msg').innerHTML
+      = "コースの距離: " + distance.toFixed(2) + "km";
+}
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['API_KEY'] %>&callback=initMap"></script>
+
+
     <div class="col-md-12">
+      <div class="text-left m-5">
+        <h4>コースの概算距離</h4>
+        <%= f.text_field :distance, required: true %><span>km</span>
+      </div>
+
+      <div class="text-center m-3">
+        <h3>コースの詳細について以下の情報を任意で入力してください。</h3>
+      </div>
       <div class="text-center">
-        <div class="row form-group">
-            <%= f.collection_check_boxes(:type, PostForm.display_types, :value, :key, include_hidden: false) do |b| %>
-            <div class="border border-success m-2">
-              <%= b.label { b.check_box + b.text } %>
-            </div>
-            <% end %>
+        <div class="text-left">
+          <h5>コース路面の種類</h5>
         </div>
         <div class="row form-group">
-            <%= f.collection_check_boxes(:time_zone, PostForm.display_time_zones, :value, :key, include_hidden: false) do |b| %>
-            <div class="border border-success m-2">
-              <%= b.label { b.check_box + b.text } %>
-            </div>
-            <% end %>
+          <% CourseType.types.each_with_index do |e, i| %>
+          <div class="border border-success p-3 m-2">
+            <%= CourseType.types_i18n[e[0]] %>
+            <%= check_box_tag "course_type[type]", e[0]  %>
+          </div>
+          <% end %>
+        </div>
+        <div class="text-left">
+          <h5>おすすめの時間帯</h5>
         </div>
         <div class="row form-group">
-            <%= f.collection_check_boxes(:equipment, PostForm.display_equipments, :value, :key, include_hidden: false) do |b| %>
-            <div class="border border-success m-2">
-              <%= b.label { b.check_box + b.text } %>
-            </div>
-            <% end %>
+          <% CourseTimeZone.time_zones.each_with_index do |e, i| %>
+          <div class="border border-success p-3 m-2">
+            <%= CourseTimeZone.time_zones_i18n[e[0]] %>
+            <%= check_box_tag "course_method[method]", e[0]  %>
+          </div>
+          <% end %>
+        </div>
+        <div class="text-left">
+          <h5>付近にある設備</h5>
         </div>
         <div class="row form-group">
-            <%= f.collection_check_boxes(:method, PostForm.display_methods, :value, :key, include_hidden: false) do |b| %>
-            <div class="border border-success m-2">
-              <%= b.label { b.check_box + b.text } %>
-            </div>
-            <% end %>
+          <% CourseEquipment.equipment.each_with_index do |e, i| %>
+          <div class="border border-success p-3 m-2">
+            <%= CourseEquipment.equipment_i18n[e[0]] %>
+            <%= check_box_tag "course_equipment[equipment]", e[0]  %>
+          </div>
+          <% end %>
+        </div>
+        <div class="text-left">
+          <h5>おすすめの運動の仕方</h5>
+        </div>
+        <div class="row form-group">
+
+          <% CourseMethod.methods.each_with_index do |e, i| %>
+          <div class="border border-success p-3 m-2">
+            <%= CourseMethod.methods_i18n[e[0]] %>
+            <%= check_box_tag "course_method[method]", e[0]  %>
+          </div>
+          <% end %>
         </div>
 
       </div>
     </div>
-
-    <div class="text-center">
-      <%= f.submit '投稿', class: "btn btn-success" %>
+    <div class="text-center m-5">
+      <%= f.submit '投稿する', class: "btn btn-success" %>
     </div>
-    <!--<%# end %> course_form-->
     <!--<% end %> form_with-->
   </div>
 </div>
-
-
-

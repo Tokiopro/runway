@@ -1,0 +1,15 @@
+<h5>行った！<h5>
+  <% if !user_signed_in? %>
+    <i class="fa-solid fa-square-check fa-2x"></i>
+    <h5><%= post.gones.length %></h5>
+  <% elsif current_user.goned_by?(post.id) %>
+    <%= link_to post_gone_path(post, post.gones), method: :delete, remote: true do %>
+      <i class="fa-solid fa-square-check fa-2x"></i>
+    <% end %>
+    <h5><%= post.gones.length %></h5>
+  <% else %>
+    <%= link_to post_gones_path(post), method: :post, remote: true do %>
+      <i class="fa-solid fa-square-check fa-2x ungone-btn"></i>
+    <% end %>
+    <h5><%= post.gones.length %></h5>
+  <% end %>

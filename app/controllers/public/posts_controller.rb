@@ -2,16 +2,15 @@ class Public::PostsController < ApplicationController
   before_action :ensure_user, only: [:edit, :uodate, :destroy]
 
   def new
+    #PostForm = フォームオブジェクト(app/form/post_form.rb)
     @post = PostForm.new
-    # @post = Post.new
-    # @post.build_course
   end
 
   def create
     @post = PostForm.new(post_params)
 
     if @post.save
-      redirect_to post_path(@post.post_id)
+      redirect_to post_path(@post.post_id), notice: "投稿に成功しました!"
     else
       render 'new', notice: "投稿できませんでした"
     end
@@ -27,9 +26,9 @@ class Public::PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find(params[:id])
-    if @post.update(post_params)
-      redirect_to post_path(@post.id)
+    @post = PostForm.new(post_params)
+    if @post.save
+      redirect_to post_path(@post.id), notice: "投稿情報を更新しました！"
     else
       render edit_post_path(@post.id), notice: "更新できませんでした"
     end
@@ -38,14 +37,13 @@ class Public::PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to root_path
+    redirect_to root_path, notice: "投稿を削除しました"
   end
 
   private
 
   def post_params
-    params.require(:post_form).permit(:post_id, :article, :image, :name, :prefecutures, :undulation, :traffic_light, :street_light, :type, :equipment, :method, type: [], time_zone: [], equipment: [], method: []).merge(user_id: current_user.id)
-    # params.require(:post).permit(:post_id, :article, :image, course_attributes: [:name]).merge(user_id: current_user.id)
+    params.require(:post_form).permit(:post_id, :article, :image, :distance, :name, :prefecutures, :undulation, :traffic_light, :street_light, :type, :equipment, :method, type: [], time_zone: [], equipment: [], method: []).merge(user_id: current_user.id)
   end
 
   def ensure_user

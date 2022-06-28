@@ -1,0 +1,15 @@
+<h5>行きたい！</h5>
+  <% if !user_signed_in? %>
+    <i class="fa-solid fa-square-check fa-3x"></i>
+    <h5><%= post.gos.length %></h5>
+  <% elsif current_user.god_by?(post.id) %>
+    <%= link_to post_go_path(post, post.gos), method: :delete, remote: true do %>
+      <i class="fa-brands fa-golang fa-3x"></i>
+    <% end %>
+    <h5><%= post.gos.length %></h5>
+  <% else %>
+    <%= link_to post_gos_path(post), method: :post, remote: true do %>
+      <i class="fa-brands fa-golang fa-3x ungo-btn"></i>
+    <% end %>
+    <h5><%= post.gos.length %></h5>
+<% end %>

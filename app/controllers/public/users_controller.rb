@@ -1,5 +1,5 @@
 class Public::UsersController < ApplicationController
-  before_action :ensure_user, only: [:edit, :update, :destroy]
+  before_action :current_user, only: [:edit, :update, :destroy]
   def show
     @user = User.find(params[:id])
   end
@@ -10,8 +10,11 @@ class Public::UsersController < ApplicationController
 
   def update
     @user = User.find(current_user.id)
-    @user.update(user_params)
-    redirect_to users_path
+    if @user.update(user_params)
+    redirect_to user_path, notice: "プロフィールを更新しました"
+    else
+      render :edit
+    end
   end
 
   def withdrawal
@@ -25,11 +28,6 @@ class Public::UsersController < ApplicationController
 
   private
 
-  def ensure_user
-    #@posts = current_user.posts
-    #@post = @posts.find_by(id: params[:id])
-    #redirect_to new_post_path unless @post
-  end
 
   def user_params
     params.require(:user).permit(:name, :sex, :introduction, :age, :email, :profile_image)

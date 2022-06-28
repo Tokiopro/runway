@@ -1,6 +1,60 @@
-<%= form_with(model:[post, post_comment], local: true) do |f| %>
+<%= form_with(model:[post, post_comment], local: false) do |f| %>
   <!--エラーメッセージ-->
-  <%= render 'layouts/error_message', model: f.object %>
-  <%= f.text_area :comment, rows:'5',placeholder: "コメントする" %>
-  <%= f.submit "送信する" %>
+  <div id="comments-error">
+    <%= render 'layouts/error_message', model: f.object %>
+  </div>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+  コメントする
+</button>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">コメント内容</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= f.text_area :comment, rows:'5',placeholder: "コメントを入力", required: true, class: "p-auto mx-auto d-block",size:"50x10" %>
+
+      <div class="m-3 text-center d-flex">
+        <%= f.label :rate,'コース評価 ', class:'col-md-3 col-form-label' %>
+        <div class="p-1 m-1">
+          <div class="form-group row" id="star">
+          </div>
+        </div>
+
+
+
+        <script>
+　　　　  $('#star').empty();
+          $('#star').raty({
+            size     : 100,
+            starOff:  '<%= asset_path('star-off.png') %>',
+            starOn : '<%= asset_path('star-on.png') %>',
+ 　 　　     　scoreName: 'post_comment[rate]',
+ 　 　　     　half: false,
+          });
+        </script>
+      </div>
+      </div>
+      <div class="modal-footer">
+          <div class="text-left">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+          </div>
+          <div class="mx-auto">
+          </div>
+          <div class="text-right">
+            <%= f.submit "送信する", class: "btn btn-primary px-5"%>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
 <% end %>

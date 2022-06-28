@@ -1,7 +1,54 @@
 ja:
+  activerecord:
+    attributes:
   enums:
-    user:
-      sex:
-        male: 男性
-        female: 女性
-        others: 
+    user: # モデル名
+      sex: # カラム名
+        male: 男性 # enumの値
+        female: 女性 # enumの値
+        others: その他 # enumの値
+    course:
+      undulation: #起伏
+        few: ほぼない
+        little: 少しある
+        usually: 普通
+        lot: まぁまぁ
+        many: かなりある
+      traffic_light: #信号
+        few: ほぼない
+        little: 少しある
+        usually: 普通
+        lot: まぁまぁ
+        many: かなりある
+      street_light: #街灯
+        few: ほぼない
+        little: 少しある
+        usually: 普通
+        lot: まぁまぁ
+        many: かなりある
+    course_type: #コースタイプ
+      type:
+        way: ロード
+        trail: トレイル
+        beach: ビーチ
+        truck: トラック
+    course_time_zone: #時間帯
+      time_zone:
+        morning: 早朝
+        daytime: 昼間
+        evening: 夕方
+        night: 夜
+    course_equipment: #設備
+      equipment:
+        toilet: トイレ
+        room: 更衣室
+        shower: シャワー
+        locker: ロッカー
+        parking: 駐車場
+    course_method: #方法
+      method:
+        stroll: 散歩
+        walking: ウォーキング
+        running: ランニング
+        marathon: マラソン
+        dash: ダッシュ

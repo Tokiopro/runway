@@ -11,8 +11,16 @@ import "channels"
 import "jquery";
 import "popper.js";
 import "bootstrap";
-import "../stylesheets/application" 
+import "../stylesheets/application"
+window.jQuery = window.$ = require('jquery')
+require('packs/raty')
+//= require packs.raty.js
+
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+/* global $*/
+$(function(){
+  setTimeout("$('.flash').fadeOut('slow')", 2000);
+});
