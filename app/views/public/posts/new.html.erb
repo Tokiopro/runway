@@ -180,10 +180,10 @@ function initMap() {
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=<%= Rails.application.credentials.google_map_api_key %>&callback=initMap"></script>
 
-
+<h5 class="m-3">上記にコースの直線距離が計算されています。</h5>
     <div class="col-md-12">
       <div class="text-left m-5">
-        <h4>コースの概算距離</h4>
+        <h4>コースの概算距離を以下に入力してください。</h4>
         <%= f.text_field :distance, required: true %><span>km</span>
       </div>
 
