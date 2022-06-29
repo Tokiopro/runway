@@ -12,6 +12,7 @@
       <th>コースの写真</th>
       <th>ユーザー名</th>
       <th>コース名</th>
+      <th>都道府県</th>
       <th>コメント数</th>
       <th>行きたい！数</th>
       <th>行った！数</th>
@@ -23,6 +24,7 @@
       <td><%= link_to posts_path(post.id) do %><%= image_tag post.get_image(80,80) %><% end %></td>
       <td width="200"><%= link_to user_path(post.user_id) do %><%= post.user.name %><% end %></td>
       <td><%= link_to post_path(post.id) do %><%= post.course.name %><% end %></td>
+      <td><%= post.course.prefecutures %></td>
       <td class="text-center"><%= post.post_comments.count %></td>
       <td class="text-center"><%= post.gos.count %></td>
       <td class="text-center"><%= post.gones.count %></td>
