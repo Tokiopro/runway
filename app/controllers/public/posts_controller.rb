@@ -7,8 +7,6 @@ class Public::PostsController < ApplicationController
   end
 
   def create
-    p "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-    p params
     @post = PostForm.new(post_params)
 
     if @post.save
@@ -45,8 +43,6 @@ class Public::PostsController < ApplicationController
 
   private
 
-  # { post_form: { post_id: 1 }}
-  # { post: { post_id: 1 }}
   def post_params
     params.require(:post_form).permit(:post_id, :article, :image, :distance, :name, :prefecutures, :undulation, :traffic_light, :street_light, type: {}, time_zone: {}, equipment: {}, method: {}).merge(user_id: current_user.id)
   end
@@ -56,4 +52,6 @@ class Public::PostsController < ApplicationController
     @post = @posts.find_by(id: params[:id])
     redirect_to post_path(@post.id) unless @post
   end
+  
+  
 end
