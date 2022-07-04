@@ -26,7 +26,7 @@ class Post < ApplicationRecord
     tags = article.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
     tags.uniq.map do |tag|
       #　ハッシュタグは先頭の#を外した上で保存
-      tag = Tag.find_or_create_by(name: tag.doencase.delete('＃'))
+      tag = Tag.find_or_create_by(name: tag.downcase.delete('＃'))
       post.tags << tag
   end
 

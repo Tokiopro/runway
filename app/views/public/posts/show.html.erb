@@ -8,6 +8,12 @@
             <td><%= image_tag @post_form.image %><br><h3>コース名　<%= @post_form.name %></h3></td>
           </tr>
           <tr>
+            <td><h5>コース説明</h5><%= @post.article %></td>
+          </tr>
+          <tr>
+            <td><%= render_with_hashtags(@post.article) %></td>
+          </tr>
+          <tr>
             <td><h5>都道府県</h5><%= @post.course.prefecutures %></td>
           </tr>
           <tr>
