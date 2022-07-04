@@ -11,7 +11,7 @@
     </div>
     <div class="text-left m-3">
       <h4>ハッシュタグ付入力欄</h4>
-      <%= f.text_area :article, size:"55x3" %>
+      <%= f.text_area :hashbody, size:"55x3" %>
     </div>
     <div class="text-left m-3">
       <h4>画像</h4>
@@ -213,7 +213,7 @@ function initMap() {
           <% CourseTimeZone.time_zones.each_with_index do |e, i| %>
           <div class="border border-success p-3 m-2">
             <%= CourseTimeZone.time_zones_i18n[e[0]] %>
-            <%= check_box_tag "post_form[method][#{i}]", e[0]  %>
+            <%= check_box_tag "post_form[time_zone][#{i}]", e[0]  %>
           </div>
           <% end %>
         </div>

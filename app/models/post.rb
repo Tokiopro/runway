@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   has_one :course, dependent: :destroy
   has_many :post_comments, dependent: :destroy
   has_many :post_tag, dependent: :destroy
+  has_many :tags, through: :post_tag
   #行きたい！モデルのアソシエーション
   has_many :gos, dependent: :destroy
   #行った！モデルのアソシエーション
@@ -23,7 +24,7 @@ class Post < ApplicationRecord
   after_create do
     post = Post.find_by(id: id)
     # ハッシュタグを検出
-    tags = article.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
+    tags = hashbody.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
     tags.uniq.map do |tag|
       #　ハッシュタグは先頭の#を外した上で保存
       tag = Tag.find_or_create_by(name: tag.downcase.delete('＃'))
@@ -36,7 +37,7 @@ end
 before_update do
   post = Post.find_by(id: id)
   post.tags.clear
-  tags = article.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
+  tags = hashbody.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
   tags.uniq.map do |tag|
     tag = Tag.find_or_create_by(name: tag.downcase.delete('＃'))
     post.tags << tag
