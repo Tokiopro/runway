@@ -41,10 +41,29 @@ class Public::PostsController < ApplicationController
     redirect_to root_path, notice: "投稿を削除しました"
   end
 
+  def tag
+    @user = current_user
+    @tag = Tag.find_by(name: params[:name])
+    @post = @tag.posts
+  end
+
   private
 
   def post_params
-    params.require(:post_form).permit(:post_id, :article, :image, :distance, :name, :prefecutures, :undulation, :traffic_light, :street_light, type: {}, time_zone: {}, equipment: {}, method: {}).merge(user_id: current_user.id)
+    params.require(:post_form).permit(:post_id,
+                                      :article,
+                                      :hashbody,
+                                      :image,
+                                      :distance,
+                                      :name,
+                                      :prefecutures,
+                                      :undulation,
+                                      :traffic_light,
+                                      :street_light,
+                                      type: {},
+                                      time_zone: {},
+                                      equipment: {},
+                                      method: {}).merge(user_id: current_user.id)
   end
 
   def ensure_user
@@ -52,6 +71,6 @@ class Public::PostsController < ApplicationController
     @post = @posts.find_by(id: params[:id])
     redirect_to post_path(@post.id) unless @post
   end
-  
-  
+
+
 end

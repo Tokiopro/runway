@@ -10,6 +10,7 @@ class PostForm
   attribute :post_id, :integer
   attribute :user_id, :integer
   attribute :article, :string
+  attribute :hashbody, :string
   attribute :image
 
   # Course
@@ -50,6 +51,7 @@ class PostForm
       post_id: post.id,
       user_id: post.user_id,
       article: post.article,
+      hashbody: post.hashbody,
       image: post.image,
 
       name: course.name,
