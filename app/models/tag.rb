@@ -1,5 +1,5 @@
 class Tag < ApplicationRecord
-  has_many :tags, dependent: :destroy
-  has_many :posts, dependent: :destroy
+  has_many :post_tags, dependent: :destroy
+  has_many :posts, through: :post_tag
   validates :name, presence: true
 end

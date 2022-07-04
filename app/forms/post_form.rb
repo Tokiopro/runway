@@ -60,20 +60,20 @@ class PostForm
       undulation: course.undulation,
       traffic_light: course.traffic_light,
       street_light: course.street_light,
-  
+
   # [1, 2,  3]
       type: course.course_types.map {|course_type| course_type.type },
-  
+
       time_zone: course.course_time_zones.map {|course_time_zone| course_time_zone.time_zone },
-  
+
       equipment: course.course_equipments.map {|course_equipment| course_equipment.equipment },
-  
+
       method: course.course_methods.map {|course_method| course_method.method },
     )
   end
 
   def save
-    post = Post.new(article: article, user_id: user_id, image: image)
+    post = Post.new(article: article, hashbody: hashbody, user_id: user_id, image: image)
 
     course = post.build_course(
       name: name,
