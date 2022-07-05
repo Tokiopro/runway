@@ -41,10 +41,21 @@ class Public::PostsController < ApplicationController
     redirect_to root_path, notice: "投稿を削除しました"
   end
 
+  # def tag
+  #   @user = current_user
+  #   @tag = Tag.find_by(name: params[:name])
+  #   # @post = PostForm.import(params[:id])
+  # end
+
   def tag
     @user = current_user
-    @tag = Tag.find_by(name: params[:name])
-    @post = @tag.posts
+    if params[:name].nil?
+      @tags = Tag.all.to_a.group_by{ |tag| tag.posts.count}
+    else
+      @tag = Tag.find_by(name: params[:name])
+      @post = @tag.posts.page(params[:page]).per(20).reverse_order
+      @tags = Tag.all.to_a.group_by{ |tag| tag.posts.count}
+    end
   end
 
   private
