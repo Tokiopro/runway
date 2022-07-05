@@ -28,6 +28,7 @@ class Post < ApplicationRecord
     tags.uniq.map do |tag|
       #　ハッシュタグは先頭の#を外した上で保存
       tag = Tag.find_or_create_by(name: tag.downcase.delete('＃'))
+      # << は複数のハッシュタグを保存するための記号。配列として保存する。
       post.tags << tag
   end
 
