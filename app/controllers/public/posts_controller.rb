@@ -49,11 +49,11 @@ class Public::PostsController < ApplicationController
 
   def tag
     @user = current_user
-    if params[:name].nil?
+    if params[:hashname].nil?
       @tags = Tag.all.to_a.group_by{ |tag| tag.posts.count}
     else
-      @tag = Tag.find_by(name: params[:name])
-      @post = @tag.posts.page(params[:page]).per(20).reverse_order
+      @tag = Tag.find_by(hashname: params[:hashname])
+      @post = @tag.post.page(params[:page]).per(20).reverse_order
       @tags = Tag.all.to_a.group_by{ |tag| tag.posts.count}
     end
   end
@@ -71,6 +71,7 @@ class Public::PostsController < ApplicationController
                                       :undulation,
                                       :traffic_light,
                                       :street_light,
+                                      :hashname,
                                       type: {},
                                       time_zone: {},
                                       equipment: {},

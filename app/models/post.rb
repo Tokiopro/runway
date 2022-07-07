@@ -27,7 +27,7 @@ class Post < ApplicationRecord
     tags = hashbody.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
     tags.uniq.map do |tag|
       #　ハッシュタグは先頭の#を外した上で保存
-      tag = Tag.find_or_create_by(name: tag.downcase.delete('＃'))
+      tag = Tag.find_or_create_by(hashname: tag.downcase.delete('＃'))
       # << は複数のハッシュタグを保存するための記号。配列として保存する。
       post.tags << tag
   end
@@ -40,7 +40,7 @@ before_update do
   post.tags.clear
   tags = hashbody.scan(/[#＃][\w\p{Han}ぁ-ヶｦ-ﾟー]+/)
   tags.uniq.map do |tag|
-    tag = Tag.find_or_create_by(name: tag.downcase.delete('＃'))
+    tag = Tag.find_or_create_by(hashname: tag.downcase.delete('＃'))
     post.tags << tag
   end
 end

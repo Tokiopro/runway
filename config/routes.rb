@@ -24,7 +24,7 @@ Rails.application.routes.draw do
       resources :post_comments, only: [:create, :destroy]
       resources :gos, only: [:create, :destroy]
       resources :gones, only: [:create, :destroy]
-      get '/tag/:name', to: "posts#tag"
+      get '/tag/:hashname', to: "posts#tag"
     end
 
   end
