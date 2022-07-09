@@ -34,7 +34,8 @@ class PostForm
   attribute :method
 
   # Tag
-  attribute :hashname
+  attribute :tag_id, :integer
+  attribute :hashname, :string
 
   with_options presence: true do
     validates :image
@@ -50,7 +51,6 @@ class PostForm
   def self.import(post_id)
     post = Post.find(post_id)
     course = post.course
-    tag = post.tag
     new(
       post_id: post.id,
       user_id: post.user_id,
@@ -64,8 +64,6 @@ class PostForm
       undulation: course.undulation,
       traffic_light: course.traffic_light,
       street_light: course.street_light,
-
-      hashname: tag.hashname,
 
   # [1, 2,  3]
       type: course.course_types.map {|course_type| course_type.type },
@@ -89,7 +87,7 @@ class PostForm
       traffic_light: traffic_light,
       street_light: street_light)
 
-      tags = post.tags.build(
+      tag = post.tags.build(
         hashname: hashname)
 
     Hash(type).transform_keys(&:to_i).keys.each do |t|

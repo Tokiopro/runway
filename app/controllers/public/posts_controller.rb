@@ -43,8 +43,8 @@ class Public::PostsController < ApplicationController
 
   # def tag
   #   @user = current_user
-  #   @tag = Tag.find_by(name: params[:name])
-  #   # @post = PostForm.import(params[:id])
+  #   @tag = Tag.find_by(hashname: params[:hashname])
+  #   @post = PostForm.import(params[:id])
   # end
 
   def tag
