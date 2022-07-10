@@ -53,7 +53,7 @@ class Public::PostsController < ApplicationController
       @tags = Tag.all.to_a.group_by{ |tag| tag.posts.count}
     else
       @tag = Tag.find_by(hashname: params[:hashname])
-      @post = @tag.post.page(params[:page]).per(20).reverse_order
+      @post = PostForm.import(params[:id])
       @tags = Tag.all.to_a.group_by{ |tag| tag.posts.count}
     end
   end
