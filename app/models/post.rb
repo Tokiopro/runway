@@ -2,8 +2,8 @@ class Post < ApplicationRecord
   belongs_to :user
   has_one :course, dependent: :destroy
   has_many :post_comments, dependent: :destroy
-  has_many :post_tag, dependent: :destroy
-  has_many :tags, through: :post_tag
+  has_many :post_tags, dependent: :destroy
+  has_many :tags, through: :post_tags
   #行きたい！モデルのアソシエーション
   has_many :gos, dependent: :destroy
   #行った！モデルのアソシエーション
