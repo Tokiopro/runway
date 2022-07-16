@@ -5,6 +5,8 @@ class PostForm
   #クラスメソッドattributeに属性名と型を渡すと、attr_accessorと同じように属性が使えるようになる
   #ActiveModel::Attributesをincludeすることで、ActiveRecordのような属性（attribute）を持たせることができます。
   include ActiveModel::AttributeAssignment
+  #バリデーション機能の実を用意にしてくれるモジュール
+  include ActiveModel::Validations
 
   # Post
   attribute :post_id, :integer
@@ -38,7 +40,7 @@ class PostForm
   attribute :hashname, :string
 
   with_options presence: true do
-    validates :image
+    validates :image, presence: true
     validates :name
     validates :article
     validates :prefecutures

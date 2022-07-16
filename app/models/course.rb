@@ -3,9 +3,10 @@ class Course < ApplicationRecord
     has_many :course_time_zones, dependent: :destroy
     has_many :course_equipments, dependent: :destroy
     has_many :course_methods, dependent: :destroy
-  
+
     belongs_to :post
-    
+    validates :name, presence: true, length: { maximum: 100 }
+
     enum prefecutures: {  "---":0,
      北海道:1,青森県:2,岩手県:3,宮城県:4,秋田県:5,山形県:6,福島県:7,
      茨城県:8,栃木県:9,群馬県:10,埼玉県:11,千葉県:12,東京都:13,神奈川県:14,
