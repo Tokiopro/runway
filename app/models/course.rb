@@ -5,7 +5,6 @@ class Course < ApplicationRecord
     has_many :course_methods, dependent: :destroy
 
     belongs_to :post
-    validates :name, presence: true, length: { maximum: 100 }
 
     enum prefecutures: {  "---":0,
      北海道:1,青森県:2,岩手県:3,宮城県:4,秋田県:5,山形県:6,福島県:7,
