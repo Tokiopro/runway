@@ -3,11 +3,11 @@
     <%= form_with model: @post, url:posts_path do |f| %>
     <div class="text-left m-3">
       <h4>コース名</h4>
-      <%= f.text_field :name, required: true %>
+      <%= f.text_field :name %>
     </div>
     <div class="text-left m-3">
       <h4>コースの説明</h4>
-      <%= f.text_area :article, size:"55x12", required: true %>
+      <%= f.text_area :article, size:"55x12" %>
     </div>
     <div class="text-left m-3">
       <h4>ハッシュタグ付入力欄</h4>
@@ -15,7 +15,7 @@
     </div>
     <div class="text-left m-3">
       <h4>画像</h4>
-      <%= f.file_field :image, accept: "image/*", required: true %><!-- acceptで画像だけのファイル投稿 -->
+      <%= f.file_field :image, accept: "image/*" %><!-- acceptで画像だけのファイル投稿 -->
     </div>
     <div class="text-left m-3">
       <h4>コースがある都道府県</h4>
@@ -29,7 +29,7 @@
      徳島県:36,香川県:37,愛媛県:38,高知県:39,
      福岡県:40,佐賀県:41,長崎県:42,熊本県:43,大分県:44,宮崎県:45,鹿児島県:46,
      沖縄県:47
-   }, { include_blank: '選択してください'}, required: true %>
+   }, { include_blank: '選択してください'} %>
     </div>
     <div class="text-left m-3">
       <h5>コースの起伏</h5>
@@ -37,23 +37,23 @@
     <div class="form-group row m-3 text-center">
       <div class="border border-success  p-3">
         <%= f.label :undulation, '少ない' %>
-        <%= f.radio_button :undulation, :few, required: true %>
+        <%= f.radio_button :undulation, :few %>
       </div>
       <div class="border border-success text-center p-3">
         <%= f.label :undulation, 'やや少ない' %>
-        <%= f.radio_button :undulation, :little, required: true %>
+        <%= f.radio_button :undulation, :little %>
       </div>
       <div class="border border-success p-3">
         <%= f.label :undulation, '普通' %>
-        <%= f.radio_button :undulation, :usually, required: true %>
+        <%= f.radio_button :undulation, :usually %>
       </div>
       <div class="border border-success p-3">
         <%= f.label :undulation, 'やや多い' %>
-        <%= f.radio_button :undulation, :lot, required: true %>
+        <%= f.radio_button :undulation, :lot %>
       </div>
       <div class="border border-success p-3">
         <%= f.label :undulation, '多い' %>
-        <%= f.radio_button :undulation, :many, required: true %>
+        <%= f.radio_button :undulation, :many %>
       </div>
     </div>
     <div class="text-left m-3">
@@ -62,19 +62,19 @@
     <div class="form-group row m-3 text-center">
       <div class="border border-success  p-3">
         <%= f.label :traffic_light, '少ない' %>
-        <%= f.radio_button :traffic_light, :few, required: true %>
+        <%= f.radio_button :traffic_light, :few %>
       </div>
       <div class="border border-success text-center p-3">
         <%= f.label :traffic_light, 'やや少ない' %>
-        <%= f.radio_button :traffic_light, :little, required: true %>
+        <%= f.radio_button :traffic_light, :little %>
       </div>
       <div class="border border-success p-3">
         <%= f.label :traffic_light, '普通' %>
-        <%= f.radio_button :traffic_light, :usually, required: true %>
+        <%= f.radio_button :traffic_light, :usually %>
       </div>
       <div class="border border-success p-3">
         <%= f.label :traffic_light, 'やや多い' %>
-        <%= f.radio_button :traffic_light, :lot, required: true %>
+        <%= f.radio_button :traffic_light, :lot %>
       </div>
       <div class="border border-success p-3">
         <%= f.label :traffic_light, '多い' %>
