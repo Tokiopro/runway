@@ -39,13 +39,13 @@ class PostForm
 
   with_options presence: true do
     validates :image
-    validates :name
-    validates :article
+    validates :name, length: 30
+    validates :article, length: 300
     validates :prefecutures
     validates :undulation
     validates :traffic_light
     validates :street_light
-    validates :distance
+    validates :distance, numericality: true
   end
 
   def self.import(post_id)
