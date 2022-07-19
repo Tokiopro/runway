@@ -3,7 +3,13 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
+         
+  #名前は重複しないように一意性を持たせる
+  validates :name, presence: true, uniqueness: true, length: { maximum: 20 }
+  #自己紹介文は500文字まで
+  validates :introduction, length: { maximum: 500 }
+  #年齢は整数のみ,桁数は2桁〜３桁       
+  validates :age, length: { in: 2..3 }, numericality: { only_integer: true }
   enum sex: { male: 0, female: 1, others: 2}
   has_many :posts, dependent: :destroy
   has_many :post_comments, dependent: :destroy

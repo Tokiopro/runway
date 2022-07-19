@@ -2,5 +2,6 @@ class PostComment < ApplicationRecord
   belongs_to :user
   belongs_to :post
 
-  validates :comment, presence: true
+  #コメントは300文字まで
+  validates :comment, presence: true, length: { maximum: 300 }
 end
