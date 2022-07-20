@@ -1,4 +1,5 @@
 <div class="container">
+  <%= render 'layouts/error_message', model: f.object %>
   <div class="col-md-12">
     <%= form_with model: @post, url:posts_path do |f| %>
     <div class="text-left m-3">
