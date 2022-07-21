@@ -39,8 +39,8 @@ class PostForm
 
   with_options presence: true do
     validates :image
-    validates :name, length: 30
-    validates :article, length: 300
+    validates :name, length: { maximum: 30 }
+    validates :article, length: { maximum: 300 }
     validates :prefecutures
     validates :undulation
     validates :traffic_light
