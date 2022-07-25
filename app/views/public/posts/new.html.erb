@@ -1,5 +1,5 @@
 <div class="container">
-  <%= render 'shared/error_messages', object: f.object %>
+  <%= render 'public/shared/error_messages', object: @post %>
   <div class="col-md-12">
     <%= form_with model: @post, url:posts_path do |f| %>
     <div class="text-left m-3">
