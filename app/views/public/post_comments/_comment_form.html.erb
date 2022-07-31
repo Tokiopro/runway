@@ -1,7 +1,7 @@
 <%= form_with(model:[post, post_comment], local: false) do |f| %>
   <!--エラーメッセージ-->
   <div id="comments-error">
-    <%= render 'layouts/error_message', model: f.object %>
+    <%= render 'public/shared/error_messages', object: @comment, object: @post %>
   </div>
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
