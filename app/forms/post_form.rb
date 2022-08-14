@@ -75,7 +75,8 @@ class PostForm
       method: course.course_methods.map {|course_method| course_method.method },
     )
   end
-
+  
+  #saveメソッドのロジックを定義
   def save
     post = Post.new(article: article, hashbody: hashbody, user_id: user_id, image: image)
 
